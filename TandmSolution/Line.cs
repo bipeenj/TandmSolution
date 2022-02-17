@@ -34,8 +34,11 @@ namespace TandmSolution
             Vector3? toReturn = null;
             var dir = Direction();
             var unitDir = Vector3.Normalize(dir);
-            float dist = (float)OrthogonalDistanceToPoint(fromPoint);
-            toReturn = Vector3.Multiply(dist,unitDir);
+            var dirTopoint = fromPoint - First;
+            var projectionDist = Math.Abs(Vector3.Dot(dirTopoint, Direction())) / Length();
+            //float dist = (float)OrthogonalDistanceToPoint(fromPoint);
+            toReturn = Vector3.Multiply(projectionDist, unitDir);
+            toReturn = fromPoint + toReturn;
             return toReturn;
         }
     }
